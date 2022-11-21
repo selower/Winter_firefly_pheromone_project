@@ -1,0 +1,10 @@
+---
+title: "P. pyralis adult infection survival data analysis"
+---
+
+This website hosts the following documents:
+  
+  + S1: Elytron length and mass relationships analysis  
+  + S2: Exploring linearity of condition analysis
+  + S3: Uninfected firefly analysis
+  + S4: Infected firefly analysis
