@@ -2,15 +2,14 @@
 title: "Field Trial Statistics"
 author: "Hannah Holmes and Dr. Sarah Lower"
 date: "5/15/2022"
-output:
+editor_options: 
+  chunk_output_type: console
+output: 
   html_document:
-    code_folding: hide
     toc: TRUE
     toc_float: TRUE
-    toc_depth: 4
-    fig_caption: TRUE
-editor_options:
-  chunk_output_type: console
+    toc_depth: 6
+    code_folding: hide
 ---
 
 # Goal:
@@ -208,7 +207,7 @@ r_w_sig <- ggplot(VT_Ecorr_Trial_df_mod, aes(x = Treatment,
   ylab("N males") +
   theme(legend.position = "none", 
         axis.title.x = element_blank()) +
-  ylim(c(-1,30)) +
+  ylim(c(-2,30)) +
   geom_jitter(alpha = 0.9) +
   geom_signif(comparisons=list(c("S", "S + P")),
               annotations="**",

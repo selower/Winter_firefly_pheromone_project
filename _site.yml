@@ -1,18 +1,12 @@
-name: "P. pyralis adult survival infection data analysis"
+name: "P. corrusca pheromone data analysis"
 output_dir: "."
 navbar:
-  title: "P. pyralis adult survival infection data analysis"
+  title: "P. corrusca pheromone data analysis"
   left:
     - text: "Home"
       href: index.html
-    - text: "S1.Elytron length and mass relationships"
-      href: S1.EL_Mass_relationships_6_14_22.html
-    - text: "S2.Exploring linearity of condition"
-      href: S2.Exploring_linearity_condition_5_13_22.html
-    - text: "S3.Uninfected firefly analysis"
-      href: S3.Uninfected_Analysis_8_31_2022.html
-    - text: "S4.Infected firefly analysis"
-      href: S4.Infected_Analysis_8_31_22.html
+    - text: "Analysis"
+      href: Field_trials_StatsandFigs_10_28_22.html
 output:
   html_document:
     theme: yeti

@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Hannah Holmes and Dr. Sarah Lower" />
+
+
+<title>Field Trial Statistics</title>
+
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">P. corrusca pheromone data analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Field_trials_StatsandFigs_10_28_22.html">Analysis</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Field Trial Statistics</h1>
+<h4 class="author">Hannah Holmes and Dr. Sarah Lower</h4>
+<h4 class="date">5/15/2022</h4>
+
+</div>
+
+
+<div id="goal" class="section level1">
+<h1>Goal:</h1>
+<p><strong>To test whether:</strong></p>
+<ul>
+<li>in <strong>field trials</strong>, there were significantly more male
+<em>P. corrusca</em> captured in sticky traps with solvent + pheromone
+versus traps with solvent alone.</li>
+<li>in <strong>laboratory bioassays</strong>, male <em>P. corrusca</em>
+spent more time with solvent + pheromone lures than lures with solvent
+alone.</li>
+<li>to <strong>generate figures</strong> for the main manuscript.</li>
+</ul>
+<pre class="r"><code>#clear the workspace
+rm(list = ls())
+
+#load necessary packages
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(patchwork)
+library(cowplot)
+library(knitr)
+library(ggpubr)
+library(rstatix)
+library(tidyr)
+library(ggpubr)
+library(reshape2)
+library(ggpattern)</code></pre>
+<div id="field-trials" class="section level2">
+<h2>Field Trials</h2>
+<div id="pennsylvania-field-trials-data-analysis"
+class="section level3">
+<h3>Pennsylvania Field Trials Data Analysis</h3>
+<div id="step-1-load-data" class="section level4">
+<h4>Step 1: Load data</h4>
+<pre class="r"><code>#load the PA data
+Ecorr_Trial_df &lt;- read.csv(&quot;Field.Data_5.14.2022.csv&quot;, header = TRUE)
+
+#make a nice table
+Ecorr_Trial_df_summary &lt;- Ecorr_Trial_df %&gt;%
+  group_by(Treatment) %&gt;%
+  summarise(mean_males = mean(N_individuals),
+            sd_males = sd(N_individuals))
+
+#view the table           
+kbl(Ecorr_Trial_df_summary, digits = c(2), col.names = c(&quot;Treatment&quot;, &quot;Mean males captured&quot;, &quot;SD&quot;)) %&gt;%
+  kable_classic(full_width = F, html_font = &quot;Cambria&quot;, position = &quot;center&quot;)</code></pre>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Treatment
+</th>
+<th style="text-align:right;">
+Mean males captured
+</th>
+<th style="text-align:right;">
+SD
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Solvent
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Solvent + Pheromone
+</td>
+<td style="text-align:right;">
+14.8
+</td>
+<td style="text-align:right;">
+5.36
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="step-2-mann-whitney-u-wilcoxon-test" class="section level4">
+<h4>Step 2: Mann Whitney U (Wilcoxon) Test</h4>
+<p>Because data not normally distributed (solvent-only are all 0), will
+proceed with non-parametric tests.</p>
+<pre class="r"><code>#wilcox test, P = 
+res &lt;- wilcox.test(N_individuals ~ Treatment, data = Ecorr_Trial_df,
+            alternative = c(&quot;less&quot;))
+res</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  N_individuals by Treatment
+## W = 0, p-value = 0.003645
+## alternative hypothesis: true location shift is less than 0</code></pre>
+<ul>
+<li>P = 0.003645 - yes, the control (solvent-only) treatment catches
+significantly fewer individuals.</li>
+</ul>
+</div>
+<div id="step-3-boxplot" class="section level4">
+<h4>Step 3: Boxplot</h4>
+<p>Graph shows N males captured in solvent-only and solvent + pheromone
+traps, with standard deviation. During this trial, only male specimens
+were caught in traps.</p>
+<pre class="r"><code>#make sure Treatment is a factor
+Ecorr_Trial_df &lt;- tibble(Ecorr_Trial_df)
+Ecorr_Trial_df$Treatment &lt;- factor (Ecorr_Trial_df$Treatment, levels = c(&quot;Solvent&quot;, &quot;Solvent + Pheromone&quot;))
+
+#make the stat test table
+#stat.test &lt;- Ecorr_Trial_df %&gt;%
+#  wilcox_test(N_individuals ~ Treatment, alternative = c(&quot;less&quot;)) %&gt;%
+#  add_significance()
+#stat.test &lt;- stat.test %&gt;% add_xy_position(x = &quot;Treatment&quot;)
+
+Ecorr_Trial_df_mod &lt;- Ecorr_Trial_df
+Ecorr_Trial_df_mod$Treatment &lt;- gsub(&quot;Solvent&quot;, &quot;S&quot;, Ecorr_Trial_df_mod$Treatment)
+Ecorr_Trial_df_mod$Treatment &lt;- gsub(&quot;Pheromone&quot;, &quot;P&quot;, Ecorr_Trial_df_mod$Treatment)
+
+#make barplot
+#q &lt;- ggbarplot(Ecorr_Trial_df_mod, 
+#               x = &quot;Treatment&quot;, 
+#               y = &quot;N_individuals&quot;, 
+#               fill = &quot;Treatment&quot;, 
+#               palette = c(&quot;#ff7f00&quot;, &quot;#377eb8&quot;), 
+#               add = &quot;mean_sd&quot;, 
+#               xlab = FALSE, 
+#               ylab = &quot;N males&quot;, 
+#               font.y = c(14, &quot;plain&quot;, &quot;black&quot;),
+#               legend = &quot;none&quot;, 
+#               ylim = c(0, 30))
+#add stats
+#q_w_sig &lt;- q + stat_pvalue_manual(stat.test, 
+#                       label = &quot;p.signif&quot;,
+#                       vjust = -1, 
+#                       bracket.nudge.y = 1, 
+#                       bracket.size = .7)
+#q_w_sig
+
+q_w_sig &lt;- ggplot(Ecorr_Trial_df_mod, aes(x = Treatment, y = N_individuals, fill = Treatment)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.7) +
+  theme_classic() +
+  xlab(&quot;Treatment&quot;) +
+  ylab(&quot;N males&quot;) +
+  theme(legend.position = &quot;none&quot;, 
+        axis.title.x = element_blank()) +
+  scale_fill_manual(values = c(&quot;#ff7f00&quot;, &quot;#377eb8&quot;)) +
+  ylim(c(-1,30))+
+  geom_jitter(alpha = 0.9) +
+  geom_signif(comparisons=list(c(&quot;S&quot;, &quot;S + P&quot;)), annotations=&quot;**&quot;,
+              y_position = 25, tip_length = .01, vjust=0.4)
+q_w_sig</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/boxplot%20PA-1.png" width="288" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ggsave(&quot;PA_field_trials_2022.pdf&quot;, q_w_sig, device = &quot;pdf&quot;, width = 58, height = 65, units = c(&quot;mm&quot;), dpi = 1200)
+#ggsave(&quot;PA_field_trials_2022.png&quot;, q_w_sig, device = &quot;png&quot;, width = 58, height = 65, units = c(&quot;mm&quot;), dpi = 1200)</code></pre>
+</div>
+</div>
+<div id="vermont-field-trials-data-analysis" class="section level3">
+<h3>Vermont Field Trials Data Analysis</h3>
+<div id="step-1-input-vt-data" class="section level4">
+<h4>Step 1: Input VT Data</h4>
+<pre class="r"><code>#load the PA data
+VT_Ecorr_Trial_df &lt;- read.csv(&quot;VT_Field.Data_5.20.2022.csv&quot;, header = TRUE)
+
+#make a nice table
+VT_Ecorr_Trial_df_summary &lt;- VT_Ecorr_Trial_df %&gt;%
+  group_by(Treatment) %&gt;%
+  summarise(mean_males = mean(N_individuals),
+            sd_males = sd(N_individuals))
+
+#view the table           
+kbl(VT_Ecorr_Trial_df_summary, digits = c(2), col.names = c(&quot;Treatment&quot;, &quot;Mean males captured&quot;, &quot;SD&quot;)) %&gt;%
+  kable_classic(full_width = F, html_font = &quot;Cambria&quot;, position = &quot;center&quot;)</code></pre>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Treatment
+</th>
+<th style="text-align:right;">
+Mean males captured
+</th>
+<th style="text-align:right;">
+SD
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Solvent
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Solvent + Pheromone
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+4.64
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="step-2-mann-whitney-u-wilcoxon-test-1" class="section level4">
+<h4>Step 2: Mann Whitney U (Wilcoxon) Test</h4>
+<p>Because data not normally distributed (solvent-only are all 0), will
+proceed with non-parametric tests.</p>
+<pre class="r"><code>#wilcox test, P = 
+res &lt;- wilcox.test(N_individuals ~ Treatment, data = VT_Ecorr_Trial_df,
+            alternative = c(&quot;less&quot;))
+res</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  N_individuals by Treatment
+## W = 0, p-value = 0.003645
+## alternative hypothesis: true location shift is less than 0</code></pre>
+<ul>
+<li>P = 0.003645 - yes, the control (solvent-only) treatment catches
+significantly fewer individuals.</li>
+</ul>
+</div>
+<div id="step-3-boxplot-1" class="section level4">
+<h4>Step 3: Boxplot</h4>
+<p>Graph shows N males for control and treatment groups, with standard
+deviation. During this trial, only male specimens were caught in
+traps.</p>
+<pre class="r"><code>#make sure Treatment is a factor
+VT_Ecorr_Trial_df &lt;- tibble(VT_Ecorr_Trial_df)
+VT_Ecorr_Trial_df$Treatment &lt;- factor (VT_Ecorr_Trial_df$Treatment, levels = c(&quot;Solvent&quot;, &quot;Solvent + Pheromone&quot;))
+
+#make the stat test table
+#stat.test &lt;- VT_Ecorr_Trial_df %&gt;%
+#  wilcox_test(N_individuals ~ Treatment, alternative = c(&quot;less&quot;)) %&gt;%
+#  add_significance()
+#stat.test &lt;- stat.test %&gt;% add_xy_position(x = &quot;Treatment&quot;)
+
+#change treatment labels to be more compact
+VT_Ecorr_Trial_df_mod &lt;- VT_Ecorr_Trial_df
+VT_Ecorr_Trial_df_mod$Treatment &lt;- gsub(&quot;Solvent&quot;, &quot;S&quot;, VT_Ecorr_Trial_df_mod$Treatment)
+VT_Ecorr_Trial_df_mod$Treatment &lt;- gsub(&quot;Pheromone&quot;, &quot;P&quot;, VT_Ecorr_Trial_df_mod$Treatment)
+
+#make barplot
+#r &lt;- ggbarplot(VT_Ecorr_Trial_df_mod, 
+#               x = &quot;Treatment&quot;, 
+#               y = &quot;N_individuals&quot;, 
+#               fill = &quot;Treatment&quot;, 
+#               palette = c(&quot;black&quot;, &quot;white&quot;), 
+#               add = &quot;mean_sd&quot;, 
+#               xlab = FALSE, 
+#               ylab = &quot;N males&quot;, 
+#               font.y = c(14, &quot;plain&quot;, &quot;black&quot;),
+#               legend = &quot;none&quot;, 
+#               ylim = c(0, 30))
+#add stats
+#r_w_sig &lt;- r + stat_pvalue_manual(stat.test, 
+#                       label = &quot;p.signif&quot;,
+#                       vjust = -1, 
+#                       bracket.nudge.y = 1, 
+#                       bracket.size = .7)
+#r_w_sig
+
+r_w_sig &lt;- ggplot(VT_Ecorr_Trial_df_mod, aes(x = Treatment, 
+                           y = N_individuals)) +
+  geom_boxplot_pattern(aes(pattern_fill = Treatment),
+                       fill = c(&quot;#ff7f00&quot;, &quot;#377eb8&quot;),
+                       color = &quot;black&quot;,
+                       pattern = &#39;stripe&#39;,
+                       pattern_fill = &quot;black&quot;) +
+  theme_classic() +
+  xlab(&quot;Treatment&quot;) +
+  ylab(&quot;N males&quot;) +
+  theme(legend.position = &quot;none&quot;, 
+        axis.title.x = element_blank()) +
+  ylim(c(-1,30)) +
+  geom_jitter(alpha = 0.9) +
+  geom_signif(comparisons=list(c(&quot;S&quot;, &quot;S + P&quot;)),
+              annotations=&quot;**&quot;,
+              y_position = 25, 
+              tip_length = .01, 
+              vjust=0.4)
+
+r_w_sig</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/boxplot%20VT-1.png" width="288" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ggsave(&quot;VT_field_trials_2022.pdf&quot;, r_w_sig, device = &quot;pdf&quot;, width = 58, height = 65, units = c(&quot;mm&quot;), dpi = 1200)
+#ggsave(&quot;VT_field_trials_2022.png&quot;, r_w_sig, device = &quot;png&quot;, width = 58, height = 65, units = c(&quot;mm&quot;), dpi = 1200)</code></pre>
+</div>
+</div>
+</div>
+<div id="lab-trials" class="section level2">
+<h2>Lab Trials</h2>
+<div id="step-1-read-in-the-data" class="section level3">
+<h3>Step 1: Read in the data</h3>
+<p>All Data (N unique males = 8)</p>
+<pre class="r"><code>#read in data
+Behavioral_Analysis &lt;- read.csv(&quot;Behavioral_Analysis_Sheet_Rep1.csv&quot;, header = TRUE)
+
+#get data into usable form
+Behavioral_Analysis_raw &lt;- tibble(Filename = Behavioral_Analysis$File_Name, Male = Behavioral_Analysis$Male, Duration = Behavioral_Analysis$Total_time_of_behavior_s, Behavior = Behavioral_Analysis$Behavior)
+
+#Sum behaviors by each male
+Behavioral_Analysis_summary &lt;- Behavioral_Analysis_raw %&gt;%
+  group_by(Male, Behavior) %&gt;%
+  summarize(Cumulative_time_s = sum(Duration))
+
+#Make longer to figure out where there are instances of no contact in control or experimental -&gt; replace with 0s
+Behavioral_Analysis_summary_wide &lt;- Behavioral_Analysis_summary %&gt;%
+  pivot_wider(names_from = Behavior, values_from = Cumulative_time_s)
+
+#Change NAs to zero (if a behavior didn&#39;t happen, it wasn&#39;t logged)
+Behavioral_Analysis_summary_wide &lt;- Behavioral_Analysis_summary_wide %&gt;%
+  mutate_at(vars(c(&quot;TOUCHING_E&quot;, &quot;TOUCHING_C&quot;, &quot;MOUNTING_E&quot;, &quot;MOUNTING_C&quot;, &quot;COPULATING_E&quot;)), ~replace_na(.,0))
+
+#There were no copulations with control -&gt; add a column for that
+Behavioral_Analysis_summary_wide$COPULATING_C &lt;- 0
+
+#add in columns for total contact time with experimental and control
+Behavioral_Analysis_summary_wide &lt;-
+  Behavioral_Analysis_summary_wide %&gt;%
+  mutate(Total_contact_time_E = sum(TOUCHING_E, MOUNTING_E, COPULATING_E),
+         Total_contact_time_C = sum(TOUCHING_C, MOUNTING_C, COPULATING_C))
+
+#convert to long form
+Behavioral_Analysis_summary_long &lt;-
+  Behavioral_Analysis_summary_wide %&gt;%
+  pivot_longer(cols = c(&quot;TOUCHING_E&quot;, &quot;TOUCHING_C&quot;, &quot;MOUNTING_E&quot;, &quot;MOUNTING_C&quot;, &quot;COPULATING_E&quot;, &quot;COPULATING_C&quot;, &quot;Total_contact_time_E&quot;, &quot;Total_contact_time_C&quot;), 
+               names_to = &quot;Behavior_by_trap_type&quot;, 
+               values_to = &quot;Time&quot;)
+  
+#Separate Behavior column into trap type and behavior
+Behavioral_Analysis_summary_long &lt;- Behavioral_Analysis_summary_long %&gt;%
+  mutate(Behavior = case_when(
+    startsWith(Behavior_by_trap_type, &quot;TOUCHING&quot;) ~ &quot;Touching&quot;,
+    startsWith(Behavior_by_trap_type, &quot;MOUNTING&quot;) ~ &quot;Mounting&quot;,
+    startsWith(Behavior_by_trap_type, &quot;COPULATING&quot;) ~ &quot;Copulating&quot;,
+    startsWith(Behavior_by_trap_type, &quot;Total&quot;) ~ &quot;Contact&quot;
+    ),
+    Trap_type = case_when(
+      endsWith(Behavior_by_trap_type, &quot;E&quot;) ~ &quot;Solvent + Pheromone&quot;,
+      endsWith(Behavior_by_trap_type, &quot;C&quot;) ~ &quot;Solvent&quot;
+    ))
+
+#sum time by male and treatment (trap_type)
+first_rep_data_by_male &lt;- Behavioral_Analysis_summary_long %&gt;%
+  group_by(Male, Trap_type, Behavior) %&gt;%
+  summarize(Time_spent = sum(Time))
+
+#calculate means and std_dev
+first_reps_mean_std &lt;- first_rep_data_by_male %&gt;%
+  group_by(Trap_type, Behavior) %&gt;%
+  summarise(mean_time = mean(Time_spent)/60, std_dev = sd(Time_spent)/60)
+
+#make variable that combines the two
+first_reps_mean_std &lt;- first_reps_mean_std %&gt;%
+  mutate(Mean_SD = paste0(round(mean_time,2), &quot; (&quot;, round(std_dev, 2), &quot;)&quot;))
+
+#select just desired columns
+first_reps_mean_std_wide &lt;- first_reps_mean_std[,c(1,2,5)] %&gt;%
+  spread(Behavior, Mean_SD)
+
+#reorder the columns
+first_reps_mean_std_wide_ordered &lt;- first_reps_mean_std_wide[,c(1,5,4,3,2)]
+
+#control data by itself
+control_data_by_male &lt;- first_rep_data_by_male %&gt;%
+  spread(Behavior, Time_spent) %&gt;%
+  filter(Trap_type == &quot;Solvent&quot;)
+
+control_data_by_male_ordered &lt;- control_data_by_male[,c(1,2,6,5,4,3)]
+
+#experimental data by itself
+experimental_data_by_male &lt;- first_rep_data_by_male %&gt;%
+  spread(Behavior, Time_spent) %&gt;%
+  filter(Trap_type == &quot;Solvent + Pheromone&quot;)
+
+experimental_data_by_male_ordered &lt;- experimental_data_by_male[,c(1,2,6,5,4,3)]
+
+#display means + sds as kable
+big_table &lt;- kbl(first_reps_mean_std_wide_ordered) %&gt;%
+  kable_classic(full_width = F, html_font = &quot;Cambria&quot;, position = &quot;center&quot;)
+big_table &lt;- add_header_above(big_table, c(&quot; &quot;, &quot;Mean time (sd)*&quot; = 4))
+big_table &lt;- add_footnote(big_table, c(paste0(&quot;in minutes; N males = &quot;, nrow(control_data_by_male))), notation = &quot;symbol&quot;)
+big_table</code></pre>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;" colspan="1">
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+Mean time (sd)*
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Trap_type
+</th>
+<th style="text-align:left;">
+Touching
+</th>
+<th style="text-align:left;">
+Mounting
+</th>
+<th style="text-align:left;">
+Copulating
+</th>
+<th style="text-align:left;">
+Contact
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Solvent
+</td>
+<td style="text-align:left;">
+0.08 (0.18)
+</td>
+<td style="text-align:left;">
+0.04 (0.08)
+</td>
+<td style="text-align:left;">
+0 (0)
+</td>
+<td style="text-align:left;">
+0.12 (0.25)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Solvent + Pheromone
+</td>
+<td style="text-align:left;">
+1.74 (3.72)
+</td>
+<td style="text-align:left;">
+1.12 (1.78)
+</td>
+<td style="text-align:left;">
+0.05 (0.09)
+</td>
+<td style="text-align:left;">
+2.91 (3.63)
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border:0;" colspan="100%">
+<sup>*</sup> in minutes; N males = 8
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Note: All means are smaller for Control traps when compared to
+experimental (pheromone) traps. However, the standard deviations are
+large.</p>
+</div>
+<div id="step-2-statistical-tests" class="section level3">
+<h3>Step 2: Statistical Tests</h3>
+<div id="total-time-in-contact" class="section level4">
+<h4>Total time in contact</h4>
+<div id="are-the-data-normally-distributed" class="section level5">
+<h5>1. Are the data normally distributed?</h5>
+<pre class="r"><code>#1 - is data normally distributed?
+contact_data &lt;- first_rep_data_by_male %&gt;%
+  filter(Behavior == &quot;Contact&quot;)
+
+contact_data$Male &lt;- factor(contact_data$Male, levels =  unique(contact_data$Male))
+
+ggplot(contact_data, aes(x = Time_spent/60)) +
+  geom_histogram() +
+  theme_classic() +
+  labs(x = &quot;Time spent (min)&quot;, y = &quot;N fireflies&quot;)</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/contact%20normal-1.png" width="288" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#nope
+shapiro.test(contact_data$Time_spent/60)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  contact_data$Time_spent/60
+## W = 0.59089, p-value = 1.33e-05</code></pre>
+<ul>
+<li>No. Shapiro-Wilk test &lt; 0.05. Try log-transforming.</li>
+</ul>
+</div>
+<div
+id="after-square-root-transformation-are-the-data-normally-distributed"
+class="section level5">
+<h5>2. After square-root transformation, are the data normally
+distributed?</h5>
+<pre class="r"><code>#try log-transform
+contact_data &lt;- contact_data %&gt;%
+  mutate(sqrtCDmin = sqrt(Time_spent/60))
+
+#looks better -&gt; a lot of zeros
+ggplot(contact_data, aes(x = sqrtCDmin)) +
+  geom_histogram() +
+  theme_classic() +
+  labs(x = &quot;Square-root Time spent (min)&quot;, y = &quot;N fireflies&quot;)</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/contact%20sqrt-1.png" width="288" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#nope
+shapiro.test(contact_data$sqrtCDmin)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  contact_data$sqrtCDmin
+## W = 0.83253, p-value = 0.007616</code></pre>
+<ul>
+<li>No. Shapiro-Wilk test &lt; 0.05, even after square-root transform
+-&gt; lots of zeros, especially in control. Proceed with
+non-parametrics.</li>
+</ul>
+</div>
+<div
+id="do-males-spend-more-time-in-contact-with-lures-with-pheromone-nonparametric"
+class="section level5">
+<h5>3. Do males spend more time in contact with lures with pheromone?
+(nonparametric)</h5>
+<ul>
+<li>Paired wilcox test</li>
+</ul>
+<pre class="r"><code>#do non-parametric test
+#wilcox.test in R contains a &quot;paired&quot; option. 
+#p = 0.003906
+wilcox.test(Time_spent ~ Trap_type, data=contact_data, alternative = c(&quot;less&quot;), paired = TRUE)</code></pre>
+<pre><code>## 
+##  Wilcoxon signed rank exact test
+## 
+## data:  Time_spent by Trap_type
+## V = 0, p-value = 0.003906
+## alternative hypothesis: true location shift is less than 0</code></pre>
+<ul>
+<li>P = 0.003906 - yes, significantly less time spent in contact with
+solvent-only lures</li>
+</ul>
+</div>
+<div id="visualizing-the-data" class="section level5">
+<h5>4. Visualizing the data</h5>
+<ul>
+<li>Just contact</li>
+</ul>
+<pre class="r"><code>#plotting contact
+t_w_sig &lt;- ggplot(contact_data, aes(x = Trap_type, y = Time_spent/60, fill = Trap_type)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(aes(x = Trap_type, y = Time_spent/60)) +
+  ylab(&quot;Time (min)&quot;) +
+  ylim(c(-0.5, 12)) +
+  theme_classic() +
+  theme(axis.title.x = element_blank(), legend.position = &quot;none&quot;) +
+  scale_x_discrete(labels = c(&quot;S&quot;, &quot;S + P&quot;)) +
+  scale_fill_manual(values = c(&quot;#377eb8&quot;, &quot;#ff7f00&quot;)) +
+  geom_signif(comparisons=list(c(&quot;Control&quot;, &quot;Experimental&quot;)), annotations=&quot;**&quot;,
+              y_position = 11, tip_length = .01, vjust=0.4)
+
+t_w_sig</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/contact%20visual-1.png" width="288" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ggsave(&quot;contact.pdf&quot;, t_w_sig, device = &quot;pdf&quot;, width = 58, height = 65, units = c(&quot;mm&quot;), dpi = 1200)
+#ggsave(&quot;contact.png&quot;, t_w_sig, device = &quot;png&quot;, width = 58, height = 65, units = c(&quot;mm&quot;), dpi = 1200)</code></pre>
+<ul>
+<li>Another way to view the data (looking at pairs)</li>
+</ul>
+<pre class="r"><code>#plot pairs
+ggplot(contact_data, aes(x = Trap_type, y = Time_spent/60, color = Male, group = Male)) +
+  geom_point() +
+  geom_line() +
+  scale_color_manual(values = c(&quot;#a6cee3&quot;, &quot;#1f78b4&quot;, &quot;#b2df8a&quot;, &quot;#33a02c&quot;, &quot;#fb9a99&quot;, &quot;#e31a1c&quot;, &quot;#fdbf6f&quot;, &quot;#ff7f00&quot;)) +
+  theme_classic() +
+  ylab(&quot;Time (min)&quot;) +
+  theme(axis.title.x=element_blank()) +
+  scale_x_discrete(labels = c(&quot;S&quot;, &quot;S + P&quot;))</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/lab%20trial%20plotting%20pairs-1.png" width="288" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="by-different-behaviors" class="section level4">
+<h4>By different behaviors</h4>
+<ul>
+<li>Contact and other data, broken down by behavior type: the big
+plot</li>
+</ul>
+<pre class="r"><code># big plot
+first_rep_data_by_male_just_types&lt;- first_rep_data_by_male %&gt;%
+  filter(Behavior == &quot;Touching&quot; | Behavior == &quot;Mounting&quot; | Behavior == &quot;Copulating&quot;)
+  
+ggplot(first_rep_data_by_male_just_types, aes(x = Trap_type, y= Time_spent/60, fill = Trap_type, color = Trap_type)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.25) +
+  geom_jitter(aes(x = Trap_type, y = Time_spent/60)) +
+  facet_grid(~Behavior) +
+  theme_classic() +
+  scale_x_discrete(labels = c(&quot;S&quot;, &quot;S + P&quot;)) +
+  theme(axis.title.x=element_blank(), legend.position = &quot;none&quot;) +
+  ylab(&quot;Time (min)&quot;) +
+  scale_color_manual(values = c(&quot;#E8751E&quot;, &quot;#007AAE&quot;)) +
+  scale_fill_manual(values = c(&quot;#E8751E&quot;, &quot;#007AAE&quot;))</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/big%20plot-1.png" width="672" /></p>
+<div
+id="does-the-difference-in-time-spent-between-control-and-pheromone-traps-differ-among-behavioral-types"
+class="section level5">
+<h5>1. Does the difference in time spent between control and pheromone
+traps differ among behavioral types?</h5>
+<ul>
+<li>Friedman test of differences by behavioral type</li>
+</ul>
+<pre class="r"><code>first_rep_data_by_male$Behavior &lt;- factor(first_rep_data_by_male$Behavior, levels =  c(&quot;Touching&quot;, &quot;Mounting&quot;, &quot;Copulating&quot;, &quot;Contact&quot;))
+
+first_rep_data_by_male$Male &lt;- factor(first_rep_data_by_male$Male, levels = unique(first_rep_data_by_male$Male))
+
+#generate data table with pairs
+contact_data2 &lt;- first_rep_data_by_male %&gt;%
+  filter(Behavior == &quot;Contact&quot;) %&gt;%
+  spread(key = Trap_type, value = Time_spent)
+
+touch_data2 &lt;- first_rep_data_by_male %&gt;%
+  filter(Behavior == &quot;Touching&quot;) %&gt;%
+  spread(key = Trap_type, value = Time_spent)
+
+mount_data2 &lt;- first_rep_data_by_male %&gt;%
+  filter(Behavior == &quot;Mounting&quot;) %&gt;%
+  spread(key = Trap_type, value = Time_spent)
+
+copulate_data2 &lt;- first_rep_data_by_male %&gt;%
+  filter(Behavior == &quot;Copulating&quot;) %&gt;%
+  spread(key = Trap_type, value = Time_spent)
+
+diff_df2 &lt;- tibble(Male = contact_data2$Male, Diff_touch = (touch_data2$`Solvent + Pheromone` - touch_data2$Solvent)/60, Diff_mount = (mount_data2$`Solvent + Pheromone` = mount_data2$Solvent)/60, Diff_copulate = (copulate_data2$`Solvent + Pheromone` - copulate_data2$Solvent)/60, Diff_contact = (contact_data2$`Solvent + Pheromone` - contact_data2$Solvent)/60)
+
+#try just looking at diffs
+df_freid &lt;- diff_df2 %&gt;%
+  melt(id.vars= c(&quot;Male&quot;), measure.vars = c(&quot;Diff_touch&quot;, &quot;Diff_mount&quot;, &quot;Diff_copulate&quot;, &quot;Diff_contact&quot;)) %&gt;%
+  filter(variable == &quot;Diff_touch&quot; | variable == &quot;Diff_mount&quot; | variable == &quot;Diff_copulate&quot;)
+
+df_freid$Male &lt;- factor(df_freid$Male, levels = unique(df_freid$Male))
+df_freid$variable &lt;- factor(df_freid$variable, levels = c(&quot;Diff_touch&quot;, &quot;Diff_mount&quot;, &quot;Diff_copulate&quot;))
+
+friedman.test(y=df_freid$value, group=df_freid$variable, blocks=df_freid$Male)</code></pre>
+<pre><code>## 
+##  Friedman rank sum test
+## 
+## data:  df_freid$value, df_freid$variable and df_freid$Male
+## Friedman chi-squared = 4.5185, df = 2, p-value = 0.1044</code></pre>
+<pre class="r"><code>#NS - p = 0.1044</code></pre>
+<ul>
+<li><p>No, there is not a significant difference in the amount of time
+spent near pheromone vs solvent across behavioral types.</p></li>
+<li><p>Visualization</p></li>
+</ul>
+<pre class="r"><code>long_df &lt;- diff_df2 %&gt;%
+  melt(id.vars= c(&quot;Male&quot;), measure.vars = c(&quot;Diff_touch&quot;, &quot;Diff_mount&quot;, &quot;Diff_copulate&quot;, &quot;Diff_contact&quot;))
+
+long_df &lt;- long_df %&gt;%
+  filter(variable == &quot;Diff_touch&quot; | variable == &quot;Diff_mount&quot; | variable == &quot;Diff_copulate&quot;)
+
+ggplot(long_df, aes(x = variable, y = value, color = Male)) +
+  geom_point(alpha = 0.8) +
+  theme_classic() +
+  scale_color_manual(values = c(&quot;#a6cee3&quot;, &quot;#1f78b4&quot;, &quot;#b2df8a&quot;, &quot;#33a02c&quot;, &quot;#fb9a99&quot;, &quot;#e31a1c&quot;, &quot;#fdbf6f&quot;, &quot;#ff7f00&quot;)) +
+  theme(legend.position = &quot;none&quot;) +
+  labs(x = &quot;Behavior&quot;, y = &quot;Difference in time spent (min)&quot;) +
+  geom_hline(yintercept = 0, lty = 5, color = &quot;grey&quot;) +
+  scale_x_discrete(labels = c(&quot;Touching&quot;, &quot;Mounting&quot;, &quot;Copulating&quot;, &quot;Contact&quot;)) +
+  ylim(-1,11)</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/diff%20viz-1.png" width="672" /></p>
+</div>
+<div
+id="does-the-time-spent-at-the-pheromone-trap-significantly-differ-among-behavioral-types"
+class="section level5">
+<h5>2. Does the time spent at the pheromone trap significantly differ
+among behavioral types?</h5>
+<ul>
+<li>Friedman test of time @ pheromone trap by behavioral type</li>
+</ul>
+<pre class="r"><code>#isolate just behaviors, NOT their summation (contact)
+first_rep_data_by_male_subset &lt;- first_rep_data_by_male %&gt;%
+  filter(Behavior == &quot;Touching&quot; | Behavior == &quot;Mounting&quot; | Behavior == &quot;Copulating&quot;)
+
+#isolate just the experimental results
+first_rep_data_by_male_subset_exp &lt;- first_rep_data_by_male_subset %&gt;%
+  filter(Trap_type == &quot;Solvent + Pheromone&quot;)
+
+#make sure male (block) is a factor
+first_rep_data_by_male_subset_exp$Male &lt;- factor(first_rep_data_by_male_subset_exp$Male)
+
+#make sure behavior (explanatory variable) is a factor
+first_rep_data_by_male_subset_exp$Behavior &lt;- factor(first_rep_data_by_male_subset_exp$Behavior, levels = c(&quot;Touching&quot;, &quot;Mounting&quot;, &quot;Copulating&quot;))
+
+#friedman test
+friedman.test(y=first_rep_data_by_male_subset_exp$Time_spent, group=first_rep_data_by_male_subset_exp$Behavior, blocks=first_rep_data_by_male_subset_exp$Male)</code></pre>
+<pre><code>## 
+##  Friedman rank sum test
+## 
+## data:  first_rep_data_by_male_subset_exp$Time_spent, first_rep_data_by_male_subset_exp$Behavior and first_rep_data_by_male_subset_exp$Male
+## Friedman chi-squared = 8.8966, df = 2, p-value = 0.0117</code></pre>
+<pre class="r"><code>#pairwise wilcox follow-up
+pairwise.wilcox.test(first_rep_data_by_male_subset_exp$Time_spent, first_rep_data_by_male_subset_exp$Behavior, p.adj = &quot;BH&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
+## 
+## data:  first_rep_data_by_male_subset_exp$Time_spent and first_rep_data_by_male_subset_exp$Behavior 
+## 
+##            Touching Mounting
+## Mounting   1.000    -       
+## Copulating 0.024    0.024   
+## 
+## P value adjustment method: BH</code></pre>
+<ul>
+<li><p>Visualization</p>
+<ul>
+<li>First, the overall plot and stats</li>
+</ul></li>
+</ul>
+<pre class="r"><code>ggplot(first_rep_data_by_male_subset_exp, aes(x = Behavior, y = Time_spent/60)) +
+  geom_boxplot() +
+  theme_classic() +
+  ylab(&quot;Time (min)&quot;) +
+  theme(axis.title.x = element_blank()) +
+  geom_signif(comparisons=list(c(&quot;Mounting&quot;, &quot;Copulating&quot;)), annotations=&quot;*&quot;,
+              y_position = 11, tip_length = .01, vjust=0.4) +
+  geom_signif(comparisons=list(c(&quot;Touching&quot;, &quot;Copulating&quot;)), annotations=&quot;*&quot;,
+              y_position = 12, tip_length = .01, vjust=0.4)</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/visualizing%20behavioral%20types-1.png" width="672" /></p>
+<ul>
+<li>Then, by pairs</li>
+</ul>
+<pre class="r"><code>ggplot(first_rep_data_by_male_subset_exp, aes(x = Behavior, y = Time_spent/60, color = Male)) +
+  geom_point(alpha= 0.6) +
+  theme_classic() +
+  ylab(&quot;Time (min)&quot;) +
+  theme(axis.title.x = element_blank()) +
+  scale_color_manual(values = c(&quot;#a6cee3&quot;, &quot;#1f78b4&quot;, &quot;#b2df8a&quot;, &quot;#33a02c&quot;, &quot;#fb9a99&quot;, &quot;#e31a1c&quot;, &quot;#fdbf6f&quot;, &quot;#ff7f00&quot;))</code></pre>
+<p><img src="Field_trials_StatsandFigs_10_28_22_files/figure-html/friedman%20pairs-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
