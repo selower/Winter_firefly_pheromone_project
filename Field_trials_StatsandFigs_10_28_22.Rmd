@@ -16,8 +16,8 @@ output:
 
 **To test whether:** 
 
-  + in **field trials**, there were significantly more male *P. corrusca* captured in sticky traps with solvent + pheromone versus traps with solvent alone.
-  + in **laboratory bioassays**, male *P. corrusca* spent more time with solvent + pheromone lures than lures with solvent alone.
+  + in **field trials**, there were significantly more male *P. corruscus* captured in sticky traps with solvent + pheromone versus traps with solvent alone.
+  + in **laboratory bioassays**, male *P. corruscus* spent more time with solvent + pheromone lures than lures with solvent alone.
   + to **generate figures** for the main manuscript.
   
 ```{r setup, include=FALSE}
