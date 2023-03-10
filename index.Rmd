@@ -1,7 +1,7 @@
 ---
-title: "P. corrusca pheromone data analysis"
+title: "P. corruscus pheromone data analysis"
 ---
 
 This website hosts the following documents:
   
-  + Analysis for field and laboratory bioassays of *P. corrusca*
+  + Analysis for field and laboratory bioassays of *P. corruscus*
