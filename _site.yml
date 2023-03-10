@@ -1,7 +1,7 @@
-name: "P. corrusca pheromone data analysis"
+name: "P. corruscus pheromone data analysis"
 output_dir: "."
 navbar:
-  title: "P. corrusca pheromone data analysis"
+  title: "P. corruscus pheromone data analysis"
   left:
     - text: "Home"
       href: index.html
